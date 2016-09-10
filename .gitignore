@@ -1,0 +1,11 @@
+*.mp3
+*.wav
+
+*.sca
+*.vec
+*.anf
+
+images/
+out/
+results/
+soundFiles/

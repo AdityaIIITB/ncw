@@ -1,0 +1,3 @@
+<filters>
+  <filter protocol="udp" gate="0" />
+</filters>

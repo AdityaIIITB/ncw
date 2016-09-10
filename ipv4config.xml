@@ -1,0 +1,6 @@
+<config>
+	<interface hosts="*.NN*.*" address="200.0.x.x" netmask="255.255.x.x"/>
+	<interface hosts="*.Div.*" address="100.0.x.x" netmask="255.255.x.x"/>
+	<interface hosts="*.Bde*.*" address="190.0.x.x" netmask="255.255.x.x"/>
+	<interface hosts="*.Bn*.*" address="170.0.x.x" netmask="255.255.x.x"/>
+</config>

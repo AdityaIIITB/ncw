@@ -1,0 +1,86 @@
+//
+// This program is free software: you can redistribute it and/or modify
+// it under the terms of the GNU Lesser General Public License as published by
+// the Free Software Foundation, either version 3 of the License, or
+// (at your option) any later version.
+// 
+// This program is distributed in the hope that it will be useful,
+// but WITHOUT ANY WARRANTY; without even the implied warranty of
+// MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+// GNU Lesser General Public License for more details.
+// 
+// You should have received a copy of the GNU Lesser General Public License
+// along with this program.  If not, see http://www.gnu.org/licenses/.
+// 
+
+package inet.examples.ncw;
+import inet.networklayer.configurator.ipv4.IPv4NetworkConfigurator;
+import inet.physicallayer.idealradio.IdealRadioMedium;
+
+network newTopology
+{
+    parameters:
+        @display("bgb=1000,1000;bgi=background/terrain,s");
+    submodules:
+        // TODO
+        configurator: IPv4NetworkConfigurator {
+            parameters:
+                @display("p=74,24");
+        }
+//        radioMedium: IdealRadioMedium {
+//            parameters:
+//                @display("p=59,86");
+//        }
+
+        NN1: CommunicationNodeB {
+            @display("p=437,540;i=networkNode");
+        }
+        NN2: CommunicationNodeB {
+            @display("p=634,569;i=networkNode");
+        }
+
+        Div: CommunicationNodeB {
+            @display("p=520,408;i=division;b=50,,rect,#40D358,,0");
+        }
+        Bde1: CommunicationNodeC {
+            @display("p=311,772;i=brigade;b=50,,rect,#EBD929,,0");
+        }
+        Bde2: CommunicationNodeC {
+            @display("p=619,766;i=brigade;b=50,,rect,#EBD929,,0");
+        }
+        Bn1: NetworkSectorialNode {
+            @display("p=132,806;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+        Bn2: NetworkSectorialNode {
+            @display("p=457,836;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+        Bn3: NetworkSectorialNode {
+            @display("p=311,871;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+        Bn4: NetworkSectorialNode {
+            @display("p=599,871;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+        Bn5: NetworkSectorialNode {
+            @display("p=810,702;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+        Bn6: NetworkSectorialNode {
+            @display("p=788,836;i=battalion;b=50,,rect,#CF4A41,,0");
+        }
+
+    connections:
+        //        NN3.pppg++ <--> p2p104Mbps <--> NN1.pppg++;
+        NN1.pppg++ <--> p2p104Mbps <--> NN2.pppg++;
+        NN1.pppg++ <--> p2p16Mbps <--> Div.pppg++;
+        NN2.pppg++ <--> p2p16Mbps <--> Div.pppg++;
+        //        Div.pppg++ <--> p2p16Mbps <--> NN3.pppg++;
+        Bde2.pppg++ <--> p2p8Mbps <--> NN2.pppg++;
+        Bde1.pppg++ <--> p2p8Mbps <--> NN1.pppg++;
+        Bde1.pppg++ <--> p2p8Mbps <--> Bn1.pppg++;
+        Bde1.pppg++ <--> p2p8Mbps <--> Bn2.pppg++;
+        Bde1.pppg++ <--> p2p8Mbps <--> Bn3.pppg++;
+        Bde2.pppg++ <--> p2p8Mbps <--> Bn4.pppg++;
+        Bde2.pppg++ <--> p2p8Mbps <--> Bn5.pppg++;
+        Bde2.pppg++ <--> p2p8Mbps <--> Bn6.pppg++;
+        //        NN3.pppg++ <--> p2p4Mbps <--> Bn6.pppg++;
+        //        Bde1.pppg++ <--> p2p8Mbps <--> NN3.pppg++;
+}
